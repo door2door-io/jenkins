@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
+    <permission>hudson.model.Computer.Configure:user</permission>
+    <permission>hudson.model.Computer.Connect:user</permission>
+    <permission>hudson.model.Computer.Create:user</permission>
+    <permission>hudson.model.Computer.Delete:user</permission>
+    <permission>hudson.model.Computer.Disconnect:user</permission>
+    <permission>hudson.model.Hudson.Administer:user</permission>
+    <permission>hudson.model.Hudson.Read:user</permission>
+    <permission>hudson.model.Hudson.RunScripts:user</permission>
+    <permission>hudson.model.Item.Build:user</permission>
+    <permission>hudson.model.Item.Cancel:user</permission>
+    <permission>hudson.model.Item.Configure:user</permission>
+    <permission>hudson.model.Item.Create:user</permission>
+    <permission>hudson.model.Item.Delete:user</permission>
+    <permission>hudson.model.Item.Read:user</permission>
+    <permission>hudson.model.Item.Workspace:user</permission>
+    <permission>hudson.model.Run.Delete:user</permission>
+    <permission>hudson.model.Run.Update:user</permission>
+    <permission>hudson.model.View.Configure:user</permission>
+    <permission>hudson.model.View.Create:user</permission>
+    <permission>hudson.model.View.Delete:user</permission>
+    <permission>hudson.model.View.Read:user</permission>
+    <permission>hudson.scm.SCM.Tag:user</permission>
+  </authorizationStrategy>
+  <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
+    <disableSignup>true</disableSignup>
+    <enableCaptcha>false</enableCaptcha>
+  </securityRealm>
+</hudson>
