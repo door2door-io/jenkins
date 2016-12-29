@@ -22,8 +22,10 @@ destroy:
 	docker rm -v $(SERVER_CONTAINER)
 
 clean:
-	docker rm -v $$(docker ps -a -q | grep -v "$$(docker ps -q | xargs | sed 's/ /\\\|/g') ") 2>/dev/null || echo Nothing to do
-	docker rmi $$(docker images --no-trunc | grep none | awk '{print $$3 }') 2>/dev/null || echo Nothing to do
+	@echo 'Removing exited containers'
+	docker rm -v $$(docker ps -a -q -f status=exited) 2>/dev/null || echo Nothing to do
+	@echo 'Removing untagged images'
+	docker rmi $$(docker images -a | grep "^<none>" | awk '{print $3}') 2>/dev/null || echo Nothing to do
 
 unlock:
 	docker exec $(SERVER_CONTAINER) cat /var/jenkins_home/secrets/initialAdminPassword

@@ -17,24 +17,25 @@ Most commonly done with a `docker-machine start` command.
 **Create base images**  
 `make build` (you should only have to do this one time)
 
-**Start container**  
-`make start`
-
-**Stop container**  
-`make stop`
+**Start Jenkins**  
+`make start` (Jenkins is at http://192.168.99.100:8080)
 
 **Get Jenkins unlock password**  
 `make unlock`
+
+**Stop Jenkins**  
+`make stop`
 
 **Destroy container**  
 `make destroy`  
 Note: This will detach the data volume container, but not remove it. That is a manual process left to your discretion.
 
-**Clean up orphan/empty containers and images**  
-`make clean` (Dev only. Use wisely since it destroys the data volume too.)
+**Clean up orphan/exited containers and images**  
+`make clean`
 
 ---
 *TODO*
+* `make start` should not start a fresh container, but restart the exited one instead
 * Seed initial custom theme
 * Switch from `plugins.sh` to `install_plugins.sh`
 * Removal of extra plugins
