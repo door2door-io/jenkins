@@ -1,7 +1,8 @@
-CONTAINER_NAME ?= door2door/jenkins
+SERVER_CONTAINER ?= jenkins
+DATA_CONTAINER ?= jenkins-data
+SERVER_IMAGE ?= door2door/jenkins
+DATA_IMAGE ?= door2door/jenkins-data
 
-# install:
-# 	./scripts/install.sh
 
 clean:
 	docker rm -v $$(docker ps -a -q | grep -v "$$(docker ps -q | xargs | sed 's/ /\\\|/g') ") 2>/dev/null || echo Nothing to do
@@ -14,17 +15,28 @@ tag:
 	docker tag jenkins_server:latest jenkins_server:$(shell date +%Y%m%d%H%M%S)
 
 start:
+	docker run --name $(DATA_CONTAINER) $(DATA_IMAGE)
 	docker run -d \
-		--name $(CONTAINER_NAME) \
+		--name $(SERVER_CONTAINER) \
 		-p 8080:8080 \
-		-v /var/jenkins_home:/var/jenkins_home \
-		-v /var/jenkins_bkp:/var/jenkins_bkp \
-		-v /var/run/docker.sock:/var/run/docker.sock \
-		--restart always \
-		jenkins_server
+		-p 50000:50000 \
+		--volumes-from=$(DATA_CONTAINER) \
+		$(SERVER_IMAGE)
+
+		# -v /var/jenkins_bkp:/var/jenkins_bkp \
+		# -v /var/run/docker.sock:/var/run/docker.sock \
+		# --restart always
 
 stop:
-	@echo 'Stopping $(CONTAINER_NAME)'
-	docker stop $(CONTAINER_NAME)
+	@echo 'Stopping $(SERVER_CONTAINER)'
+	docker stop $(SERVER_CONTAINER)
+	docker stop $(DATA_CONTAINER)
+
+destroy:
+	@echo 'Removing $(SERVER_CONTAINER)'
+	docker rm -v $(SERVER_CONTAINER)
+
+unlock:
+	docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 
 rebuild: build tag stop clean start

@@ -5,31 +5,37 @@ Jenkins is a Continuous Integration and Delivery server.
 
 <img src="http://jenkins-ci.org/sites/default/files/jenkins_logo.png"/>
 
-
 ---
 
-(Makefile is coming)
-
-## Build images
-
-Jenkins container
-$ docker build -t door2door/jenkins .
-
-Data container
-$ docker build -t door2door/jenkins-data -f Dockerfile-data .
+# Prerequisites
+Your preferred setup of `docker` is running and operational locally.
+Most commonly done with a `docker-machine start` command.
 
 
-## Build containers
+# Get Started
 
-$ docker run --name=jenkins-data jenkins-data
-$ docker run -p 8080:8080 -p 50000:50000 --name=jenkins --volumes-from=door2door/jenkins-data -d door2door/jenkins
+**Create base images**  
+`make build` (you should only have to do this one time)
 
-## Stop container
-$ docker stop jenkins
-$ docker rm -v jenkins (-v allows data volume to be removed)
+**Start container**  
+`make start`
 
-TODO
-* Makefile
+**Stop container**  
+`make stop`
+
+**Get Jenkins unlock password**  
+`make unlock`
+
+**Destroy container**  
+`make destroy`  
+Note: This will detach the data volume container, but not remove it. That is a manual process left to your discretion.
+
+**Clean up orphan/empty containers and images**  
+`make clean`
+
+---
+*TODO*
 * Seed initial custom theme
 * Switch from `plugins.sh` to `install_plugins.sh`
 * Removal of extra plugins
+* Remove old builds (job folder bloat)
