@@ -12,7 +12,7 @@ build:
 	./scripts/build.sh
 
 tag:
-	docker tag jenkins_server:latest jenkins_server:$(shell date +%Y%m%d%H%M%S)
+	docker tag $(SERVER_IMAGE):latest $(SERVER_IMAGE):$(shell date +%Y%m%d%H%M%S)
 
 start:
 	docker run --name $(DATA_CONTAINER) $(DATA_IMAGE)
@@ -37,6 +37,6 @@ destroy:
 	docker rm -v $(SERVER_CONTAINER)
 
 unlock:
-	docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+	docker exec $(SERVER_CONTAINER) cat /var/jenkins_home/secrets/initialAdminPassword
 
 rebuild: build tag stop clean start
