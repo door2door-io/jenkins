@@ -31,7 +31,7 @@ Most commonly done with a `docker-machine start` command.
 Note: This will detach the data volume container, but not remove it. That is a manual process left to your discretion.
 
 **Clean up orphan/empty containers and images**  
-`make clean`
+`make clean` (Dev only. Use wisely since it destroys the data volume too.)
 
 ---
 *TODO*
