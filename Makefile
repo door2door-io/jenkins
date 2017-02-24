@@ -34,7 +34,7 @@ clean:
 theme:
 	@echo 'Seeding data volume with theme'
 	docker cp ./config/theme.xml $(SERVER_CONTAINER):/var/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
-	docker exec -u root -it $(SERVER_CONTAINER) chown jenkins:jenkins /var/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
+	docker exec -u root $(SERVER_CONTAINER) chown jenkins:jenkins /var/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
 
 unlock:
 	docker exec $(SERVER_CONTAINER) cat /var/jenkins_home/secrets/initialAdminPassword

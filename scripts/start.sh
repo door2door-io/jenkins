@@ -15,10 +15,12 @@ fi
 
 docker run -d \
 	--name $SERVER_CONTAINER \
-	-p 8080:8080 \
+	-p 80:80 \
 	-p 50000:50000 \
 	--volumes-from=$DATA_CONTAINER \
 	$SERVER_IMAGE
+
+docker exec -u root $SERVER_CONTAINER nginx
 
 # Later: Backups, Restarts and optionally restart exited container
 # -v /var/jenkins_bkp:/var/jenkins_bkp \

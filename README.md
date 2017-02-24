@@ -10,6 +10,7 @@ Built on the stock Jenkins docker image, this repo provides:
 * Optional install of docker to run containerized Jenkins jobs
 * Easy setup and teardown via simple `make` calls
 * Styled with [Material theme](http://afonsof.com/blog/jenkins-material-theme/)
+* nginx proxy
 
 ---
 
@@ -21,7 +22,7 @@ Most commonly done with a `docker-machine start` command.
 
 `make setup`
 
-Jenkins is now running at http://192.168.99.100:8080 with 2 containers:
+Jenkins is now running at http://192.168.99.100 with 2 containers:
 
 * `jenkins`
 * `jenkins-data` (shareable data volume)
