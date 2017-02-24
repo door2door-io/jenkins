@@ -5,6 +5,12 @@ Jenkins is a Continuous Integration and Delivery server.
 
 <img src="http://jenkins-ci.org/sites/default/files/jenkins_logo.png"/>
 
+Built on the stock Jenkins docker image, this repo provides:
+* Plugins pre-loaded in container
+* Optional install of docker to run containerized Jenkins jobs
+* Easy setup and teardown via simple `make` calls
+* Styled with [Material theme](http://afonsof.com/blog/jenkins-material-theme/)
+
 ---
 
 # Prerequisites
@@ -34,6 +40,10 @@ Note: This will detach the data volume container, but not remove it. That is a m
 `make clean`
 
 ---
+
+# Plugins
+Add plugins to install [here](config/plugins.txt)
+
 *TODO*
 * `make start` should not start a fresh container, but restart the exited one instead
 * Seed initial custom theme

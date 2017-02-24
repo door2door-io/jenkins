@@ -21,6 +21,10 @@ destroy:
 	@echo 'Removing $(SERVER_CONTAINER)'
 	docker rm -v $(SERVER_CONTAINER)
 
+destroy-data:
+	@echo 'Removing $(DATA_CONTAINER)'
+	docker rm -v $(DATA_CONTAINER)
+
 clean:
 	@echo 'Removing exited containers'
 	docker rm -v $$(docker ps -a -q -f status=exited) 2>/dev/null || echo Nothing to do

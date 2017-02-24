@@ -2,6 +2,8 @@
 
 install_dependencies() {
   apt-get update
+  apt-get clean
+  rm -rf /var/lib/apt/lists/*
 }
 
 install_docker() {
@@ -10,4 +12,4 @@ install_docker() {
 }
 
 install_dependencies
-install_docker
+# install_docker

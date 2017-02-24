@@ -1,10 +1,8 @@
-FROM jenkins:2.19.4
+FROM jenkins
 
-COPY ./scripts/install_docker.sh /tmp/install_docker.sh
+COPY ./scripts/setup.sh /tmp/setup.sh
 USER root
-RUN DOCKER_USER=jenkins /tmp/install_docker.sh \
-    && apt-get clean \
-    && rm -fr /var/lib/apt/lists/*
+RUN DOCKER_USER=jenkins /tmp/setup.sh
 
 USER jenkins
 
