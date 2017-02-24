@@ -17,13 +17,26 @@ Built on the stock Jenkins docker image, this repo provides:
 Your preferred setup of `docker` is running and operational.
 Most commonly done with a `docker-machine start` command.
 
-# Get Started
+# Quick Start
+
+`make setup`
+
+Jenkins is now running at http://192.168.99.100:8080 with 2 containers:
+
+* `jenkins`
+* `jenkins-data` (shareable data volume)
+
+Run `make unlock` to retrieve initial unlock code
+
+---
+
+# Commands
 
 **Create base images**  
 `make build` (you should only have to do this one time)
 
 **Start Jenkins**  
-`make start` (Jenkins is at http://192.168.99.100:8080)
+`make start`
 
 **Get Jenkins unlock password**  
 `make unlock`

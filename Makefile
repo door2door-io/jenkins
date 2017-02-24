@@ -31,7 +31,14 @@ clean:
 	@echo 'Removing untagged images'
 	docker rmi $$(docker images -a | grep "^<none>" | awk '{print $3}') 2>/dev/null || echo Nothing to do
 
+theme:
+	@echo 'Seeding data volume with theme'
+	docker cp ./config/theme.xml $(SERVER_CONTAINER):/var/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
+	docker exec -u root -it $(SERVER_CONTAINER) chown jenkins:jenkins /var/jenkins_home/org.codefirst.SimpleThemeDecorator.xml
+
 unlock:
 	docker exec $(SERVER_CONTAINER) cat /var/jenkins_home/secrets/initialAdminPassword
 
-rebuild: build tag stop clean start
+rebuild: build tag stop clean start theme
+
+setup: build start theme
