@@ -7,10 +7,13 @@ Jenkins is a Continuous Integration and Delivery server.
 
 Built on the stock Jenkins docker image, this repo provides:
 * Plugins pre-loaded in container
-* Optional install of docker to run containerized Jenkins jobs
 * Easy setup and teardown via simple `make` calls
 * Styled with [Material theme](http://afonsof.com/blog/jenkins-material-theme/)
 * nginx proxy
+
+Optional features:  
+* docker install to run Jenkins jobs in containers
+* HTTPS setup
 
 ---
 
@@ -31,7 +34,7 @@ Run `make unlock` to retrieve initial unlock code
 
 ---
 
-# Commands
+# Useful commands
 
 **Create base images**  
 `make build` (you should only have to do this one time)

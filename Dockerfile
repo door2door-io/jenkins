@@ -4,8 +4,11 @@ COPY scripts/setup.sh /tmp/setup.sh
 USER root
 RUN DOCKER_USER=jenkins /tmp/setup.sh
 
-RUN rm /etc/nginx/sites-available/default
-COPY config/nginx/jenkins.conf /etc/nginx/sites-available/default
+RUN rm /etc/nginx/sites-available/default && \
+	rm /etc/nginx/sites-enabled/default && \
+	ln -s /etc/nginx/sites-available/jenkins /etc/nginx/sites-enabled/jenkins
+
+COPY config/nginx/jenkins.conf /etc/nginx/sites-available/jenkins
 
 USER jenkins
 
