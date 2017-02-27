@@ -27,8 +27,3 @@ else
 fi
 
 docker exec -u root $SERVER_CONTAINER nginx
-
-# Later: Backups, Restarts and optionally restart exited container
-# -v /var/jenkins_bkp:/var/jenkins_bkp \
-# -v /var/run/docker.sock:/var/run/docker.sock \
-# --restart always
