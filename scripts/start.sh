@@ -13,12 +13,18 @@ else
 	docker create -v /var/jenkins_home --name $DATA_CONTAINER $SERVER_IMAGE
 fi
 
-docker run -d \
-	--name $SERVER_CONTAINER \
-	-p 80:80 \
-	-p 50000:50000 \
-	--volumes-from=$DATA_CONTAINER \
-	$SERVER_IMAGE
+if [ "$(docker ps -aq -f status=exited -f name=$SERVER_CONTAINER)" ]; then
+	echo "Restarting exited container"
+	docker start $SERVER_CONTAINER
+else
+	echo "Starting new container"
+	docker run -d \
+		--name $SERVER_CONTAINER \
+		-p 80:80 \
+		-p 50000:50000 \
+		--volumes-from=$DATA_CONTAINER \
+		$SERVER_IMAGE
+fi
 
 docker exec -u root $SERVER_CONTAINER nginx
 

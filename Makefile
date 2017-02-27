@@ -15,7 +15,6 @@ start:
 stop:
 	@echo 'Stopping $(SERVER_CONTAINER)'
 	docker stop $(SERVER_CONTAINER)
-	docker stop $(DATA_CONTAINER)
 
 destroy:
 	@echo 'Removing $(SERVER_CONTAINER)'
